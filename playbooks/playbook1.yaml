@@ -1,0 +1,25 @@
+---
+- name: My First playbook
+  hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Install package
+    package:
+      name: httpd
+      state: installed 
+
+  - name: Install Telnet
+    package:
+      name: telnet
+      state: installed
+
+  - name: Add Bob
+    package: 
+      name: httpd
+      state: absent
+
+  - name: Add Tom
+    package:
+      name: httpd
+      state: present
