@@ -7,8 +7,8 @@
     - name: Install necessary packages
       package:
         name: “{{item}}”
-        state: install
-        items:
+        state: latest
+      with items:
        - httpd
        - epel-release
        - wget
