@@ -7,7 +7,7 @@
     - name: Install necessary packages
       package:
         name: “{{item}}”
-        state: latest
+        state: install
         items:
        - httpd
        - epel-release
@@ -34,6 +34,7 @@
         remote_src: yes
       become: yes
       become_method: sudo
+
     - name: Move files to html folder
       shell: “mv /var/www/html/wordpress/* /var/www/html”
       become: yes
