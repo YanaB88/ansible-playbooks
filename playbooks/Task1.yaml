@@ -1,48 +1,62 @@
 ---
 - name: Installs wordpress
-  hosts: wordpress
-  become: true
-  become_method: sudo 
-  user: centos
-  tasks: 
-    - name: Install Webserver and dependencies 
-      package: 
-        name: "{{ item }}"
-      with_items: 
-        - httpd
-        - elinks 
-        - php
-        - php-gd 
-        - mysql 
-        - mariadb-server
-        - php-mysql 
-      ignore_errors: yes 
+  hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Install necessary packages
+      package:
+        name: “{{item}}”
+        state: latest
+      with_items:
+       - epel-release
+       - wget
+       - unzip
+       - mariadb-server
+      ignore_errors: true
+      notify: MARIADB RESTART
 
+    - name: Install epel-release
+      shell: “sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y”
+    - name: config manager enabled
+      shell: “sudo yum-config-manager --enable remi-php72”
+    - name : update httpd PHP
+      shell: “sudo yum install httpd php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql mysql -y”
+    - name: Download wordpress Package
+      get_url:
+        url: https://wordpress.org/wordpress-{{WORDPRESS_VERSION}}.tar.gz
+        dest: /tmp/
 
-    - name: Get Wordpress
-      get_url: 
-        url: https://wordpress.org/latest.tar.gz 
-        dest: /tmp 
+    - name: Unzip wordpres file
+      unarchive:
+        src: “/tmp/wordpress-5.2.1.tar.gz”
+        dest: “/var/www/html”
+        remote_src: yes
+      become: yes
+      become_method: sudo
+    - name: Move files to html folder
+      shell: “mv /var/www/html/wordpress/* /var/www/html”
+      become: yes
+      become_method: sudo
+      ignore_errors: yes
+    
+    - name: Create user Bob
+      user:
+        name: Bob
+        generate_ssh_key: yes
 
+    - name: Create user Lisa
+      user:
+        name: Lisa
+        generate_ssh_key: yes
 
+    - name: Create user Ben
+      user:
+        name: Ben
+        generate_ssh_key: yes
 
-    - name: Unzip wordpress
-      unarchive: 
-        src: /tmp/wordpress-5.1.tar.gz 
-        dest: /var/www/html
-        remote_src: yes 
+    - name: Create user Katty
+      user:
+        name: Katty
+        generate_ssh_key: yes
 
-
-
-    - name: Move content
-      shell: "mv /var/www/html/wordpress/*  /var/www/html" 
-      ignore_errors: yes 
-
-
-
-    - name: Start webserver 
-      systemd: 
-        name: httpd 
-        state: restarted 
-        enabled: yes 
-      ignore_errors: yes 
