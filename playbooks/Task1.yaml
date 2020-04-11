@@ -9,6 +9,7 @@
         name: “{{item}}”
         state: latest
         items:
+       - httpd
        - epel-release
        - wget
        - unzip
