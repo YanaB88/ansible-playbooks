@@ -8,7 +8,7 @@
       package:
         name: “{{item}}”
         state: latest
-      with items:
+      with_items:
        - httpd
        - epel-release
        - wget
