@@ -1,6 +1,6 @@
 ---
 - name: Installs wordpress
-  hosts: all
+  hosts: 18.130.223.39
   become: yes
   become_method: sudo
   tasks:
