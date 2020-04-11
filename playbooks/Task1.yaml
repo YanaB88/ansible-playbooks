@@ -24,7 +24,8 @@
     - name : update httpd php
       shell: “sudo yyum install php php-mysql -y”
     - name: Download wordpress Package
-      shell: wget https://wordpress.org/latest.tar.gz
+      get url:
+        url: wget https://wordpress.org/latest.tar.gz
         dest: /tmp/
 
     - name: Unzip wordpres file
