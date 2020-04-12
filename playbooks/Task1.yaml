@@ -31,10 +31,6 @@
     - name: Unzip wordpress file
       unarchive:
       shell: "tar -xf latest.tar.gz"
-        destination: “/var/www/html”
-        remote_src: yes
-      become: yes
-      become_method: sudo
 
     - name: Move files to html folder
       shell: “mv /var/www/html/wordpress/* /var/www/html”
