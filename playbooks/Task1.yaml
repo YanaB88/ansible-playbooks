@@ -25,7 +25,7 @@
     - name: update httpd php
       shell: “sudo yum install php php-mysql -y”
 
-    - name: Download Wordpress url
+    - name: wget Wordpress
       get url:
         url: wget https://wordpress.org/latest.tar.gz
         dest: /tmp/
