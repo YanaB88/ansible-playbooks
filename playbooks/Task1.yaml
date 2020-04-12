@@ -22,7 +22,7 @@
       shell: “sudo yum-config-manager --enable remi-php72”
 
     - name : update httpd php
-      shell: “sudo yum install php php-mysql -y”
+      shell: “yum install php php-mysql -y”
     - name: Download wordpress Package
       get url:
         url: wget https://wordpress.org/latest.tar.gz
