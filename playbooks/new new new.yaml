@@ -1,65 +1,58 @@
 ---
 - name: Install wordpress on CentOS 7 
   gather_facts: no 
-  hosts: 18.203.162.115  
-  become: yes
-  become_method: sudo   
+  hosts: 18.203.162.115
+  become: true
+  become_method: sudo      
   tasks: 
     - name: Install httpd
       package: 
         name: "{{ item }}"
         state: latest
       with_items:
-        - epel-release
+        - wget
         - httpd
         - php
-        - wget
-        - unzip
-        - tar
         - mariadb-server
         - mysql
+        - unzip
+        - elinks
+        - php-mysql
+        - php-gd 
       ignore_errors: yes 
-
+   
     - name: Install epel release
       shell: "sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y"
-    - name: Enable config manager
+    - name: Enable Config manager
       shell: "sudo yum-config-manager --enable remi-php72"
-    - name: update httpd
+    - name: Update httpd
       shell: "sudo yum install httpd php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql mysql -y"
-      become: true
-      become_method: sudo
-      ignore errors: true
-
-    - name: Dowload wordpress
+      
+    - name: Download wordpress
       get_url:
-        url: https://wordpress.org/latest.tar.gz
+        url: https://wordpress.org/latest.tar.gz 
         dest: /tmp/
-    - name: Unzip wordpres file
-      unarchive:
-        src: /tmp/wordpress-5.4.tar.gz   
-        dest: "/var/www/html"
-        remote_src: yes
-      become: yes
-      become_method: sudo
 
-    - name: move files to html directory
-      shell: "sudo mv /var/www/html/wordpress/*  /var/www/html/"
+    - name: Unzip wordpress
+      unarchive: 
+        src: /tmp/wordpress-5.0.1.tar.gz
+        dest: /var/www/html/
+        remote_src: yes 
+
+    - name: move files
+      shell: "mv /var/www/html/wordpress/*  /var/www/html/"
       ignore_errors: yes 
-      become: yes
-      become_method: sudo
 
     - name: Move index.html 
       shell: "mv /var/www/html/index.html /tmp/"
       ignore_errors: true
 
-    - name: restart apache 
+    - name: run apache 
       systemd: 
         name: httpd 
         state: restarted 
         enabled: yes 
       ignore_errors: yes 
-      become: yes
-      become_method: sudo
 
     - name: Create user Bob
       user:
