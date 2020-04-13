@@ -4,34 +4,40 @@
   become: yes
   become_method: sudo
   tasks:
-    - name: Install necessary packages
+    - name: Install httpd packages
       package:
         name: "{{item}}"
         state: latest
       with_items:
+       - yum_utils
        - epel-release
        - wget 
        - unzip
        - mariadb-server
+       - httpd
+       - php
+       - php72
+       - php php-mysql
+       - mysql
       ignore_errors: true
 
   
     - name: Install epel-release
       shell: "sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y"
-    - name: config manager enabled 
+    - name: Enable config manager 
       shell: "sudo yum-config-manager --enable remi-php72"
     - name : update httpd PHP 
       shell: "sudo yum install httpd php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql mysql -y" 
 
 
-    - name: Download wordpress Package
+    - name: Download wordpress
       get_url:
         url: https://wordpress.org/wordpress-5.2.1.tar.gz
         dest: /tmp/
 
     - name: Unzip wordpres file
       unarchive:
-        src: "/tmp/wordpress-5.2.1.tar.gz"    
+        src: /tmp/latest.tar.gz    
         dest: "/var/www/html"
         remote_src: yes
       become: yes
@@ -50,6 +56,7 @@
         enabled: yes
       become: yes
       become_method: sudo
+      ignore_error: yes
 
 
   
