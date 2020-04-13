@@ -16,8 +16,6 @@
        - mysql
        - httpd
        - php
-       - php72
-       - php php-mysql
       ignore_errors: true
 
   
