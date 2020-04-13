@@ -1,6 +1,6 @@
 ---
 - name: Installs wordpress & Route 53 config
-  hosts: localhost
+  hosts: 18.130.223.39
   become: yes
   become_method: sudo
   tasks:
