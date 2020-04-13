@@ -57,21 +57,24 @@
       become: yes
       become_method: sudo
 
-    - name: Create 1 user bob
+    - name: Create user Bob
       user:
-        name: bob
+        name: Bob
         generate_ssh_key: yes
-    - name: Create 1 user lisa
+
+    - name: Create user Lisa
       user:
-        name: lisa
+        name: Ben
         generate_ssh_key: yes
-    - name: Create 1 user ben
+
+    - name: Create user Lisa
       user:
-        name: ben
+        name: Lisa
         generate_ssh_key: yes
-    - name: Create 1 user kattie
+
+    - name: Create 1 user Katty
       user:
-        name: jsmith
+        name: Katty
         generate_ssh_key: yes
 
 
