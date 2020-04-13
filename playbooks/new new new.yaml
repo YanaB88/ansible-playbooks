@@ -21,14 +21,14 @@
 
     - name: Download wordpress
       get_url:
-        url: https://wordpress.org/latest.zip 
+        url: https://wordpress.org/latest.tar.zip 
         dest: /tmp/
       become: yes
       become_method: sudo 
 
     - name: Unzip wordpress
       unarchive: 
-        src: /tmp/latest.tar.gz
+        src: /tmp/wordpress-5.4.tar.gz
         dest: /var/www/html/
         remote_src: yes 
       become: yes
