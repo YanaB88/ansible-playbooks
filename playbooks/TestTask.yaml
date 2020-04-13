@@ -50,7 +50,7 @@
       ignore_errors: yes
 
 
-    - name: Restart apache
+    - name: Restart apache server
       systemd:
         name: httpd
         state: restarted  
