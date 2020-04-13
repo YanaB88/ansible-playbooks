@@ -16,6 +16,7 @@
        - mysql
        - httpd
        - php
+       - "php php-mysql"
       ignore_errors: true
 
   
