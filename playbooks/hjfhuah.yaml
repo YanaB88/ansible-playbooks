@@ -54,3 +54,25 @@
       ignore_errors: yes 
       become: yes
       become_method: sudo
+
+    - name: Create user Bob
+      user:
+        name: Bob
+        generate_ssh_key: yes
+
+    - name: Create user Lisa
+      user:
+        name: Ben
+        generate_ssh_key: yes
+
+    - name: Create user Lisa
+      user:
+        name: Lisa
+        generate_ssh_key: yes
+
+    - name: Create user Katty
+      user:
+        name: Katty
+        generate_ssh_key: yes
+
+
