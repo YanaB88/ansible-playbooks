@@ -75,4 +75,14 @@
         name: Katty
         generate_ssh_key: yes
 
+    - name: Route53 a record
+      route53:
+        state: "present"
+        zone: "devops5577.com"
+        record: "wordpress.devops5577.com"
+        type: A
+        ttl: 7200
+        value: "18.203.162.115"
+  
+
 
