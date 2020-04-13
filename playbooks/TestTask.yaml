@@ -9,7 +9,6 @@
         name: "{{item}}"
         state: latest
       with_items:
-       - yum_utils
        - epel-release
        - wget 
        - unzip
@@ -28,12 +27,15 @@
       shell: "sudo yum-config-manager --enable remi-php72"
     - name : update httpd PHP 
       shell: "sudo yum install httpd php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql mysql -y" 
-
+      become: yes
+      become_method: sudo
 
     - name: Download wordpress
       get_url:
         url: https://wordpress.org/wordpress-5.2.1.tar.gz
         dest: /tmp/
+      become: yes
+      become_method: sudo
 
     - name: Unzip wordpres file
       unarchive:
