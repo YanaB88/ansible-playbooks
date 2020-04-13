@@ -1,6 +1,6 @@
 ---
 - name: Installs wordpress & Route 53 config
-  hosts: 18.203.162.115
+  hosts: all
   become: yes
   become_method: sudo
   tasks:
@@ -16,7 +16,6 @@
        - mysql
        - httpd
        - php
-       - php_php-mysql
       ignore_errors: true
 
   
