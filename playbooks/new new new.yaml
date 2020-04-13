@@ -28,21 +28,15 @@
 
     - name: Unzip wordpress
       unarchive: 
-        src: /tmp/wordpress-5.4.tar.gz
+        src: /tmp/latest.tar.gz
         dest: /var/www/html/
         remote_src: yes 
       become: yes
       become_method: sudo
 
     - name: move files
-      shell: "mv /var/www/html/wordpress/*  /var/www/html/"
+      shell: "sudo mv /var/www/html/wordpress/*  /var/www/html/"
       ignore_errors: yes 
-      become: yes
-      become_method: sudo
-
-    - name: Move index.html 
-      shell: "mv /var/www/html/index.html /tmp/"
-      ignore_errors: true
       become: yes
       become_method: sudo
 
