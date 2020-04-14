@@ -35,7 +35,7 @@
         remote_src: yes 
 
     - name: move files to html directory
-      shell: "sudo mv /var/www/html/wordpress/* /var/www/html/"
+      shell: "sudo mv /var/www/html/wordpress/* /var/www/html"
       ignore_errors: yes 
 
     - name: Restart apache 
