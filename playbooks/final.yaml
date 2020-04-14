@@ -1,7 +1,7 @@
 ---
 - name: Install wordpress on CentOS 7 
   gather_facts: no 
-  hosts: 18.203.162.115
+  hosts: 18.237.62.133
   become: true
   become_method: sudo      
   tasks: 
@@ -72,5 +72,5 @@
         record: "wordpress.devops5577.com"
         type: A
         ttl: 7200
-        value: "18.203.162.115"
+        value: "18.237.62.133"
   
