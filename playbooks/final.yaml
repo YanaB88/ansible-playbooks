@@ -14,12 +14,11 @@
         - wget
         - httpd
         - php
+        - php-mysql
         - mariadb-server
         - mysql
         - unzip
         - elinks
-        - php-mysql
-        - php-gd 
       ignore_errors: yes 
   
 
