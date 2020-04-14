@@ -7,11 +7,13 @@
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
   tasks:
   - name: Create repo
+    when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
     copy:
       src: r1soft.repo
       dest: /etc/yum.repos.d/
 
   - name: Install agent
+    when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
     package:
         name: serverbackup-enterprise-agent
         state: installed
@@ -19,6 +21,7 @@
 
 
   - name: Stop iptables
+    when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
     service:
       name: iptables
       state: stopped
@@ -26,6 +29,7 @@
 
   - name: Get Key
     shell: "r1soft-setup --get-key http://18.130.208.138/"
+    when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
 
   handlers: 
