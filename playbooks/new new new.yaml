@@ -38,10 +38,6 @@
       shell: "sudo mv /var/www/html/wordpress/* /var/www/html/"
       ignore_errors: yes 
 
-    - name: Move index.html 
-      shell: "sudo mv /var/www/html/index.html /tmp/"
-      ignore_errors: true
-
     - name: Restart apache 
       systemd: 
         name: httpd 
