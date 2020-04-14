@@ -28,8 +28,9 @@
       enabled: false
 
   - name: Get Key
-    shell: "r1soft-setup --get-key http://18.130.208.138/"
     when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+    shell: "r1soft-setup --get-key http://18.130.208.138/"
+    
 
 
   handlers: 
